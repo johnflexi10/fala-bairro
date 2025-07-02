@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Painel de Moderação - Fala Bairro</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <div class="header">
+            <h1>Painel de Moderação</h1>
+            <a href="{{ url_for('index') }}" class="button-secondary">⬅ Voltar ao Mural</a>
+        </div>
+        <hr>
+        
+        {% if avisos %}
+            <p>Avisos com denúncias. Por favor, revise o conteúdo abaixo.</p>
+            {% for aviso in avisos %}
+                <div class="aviso-card admin-card">
+                    <p><strong>Autor: {{ aviso.nome }}</strong> ({{ aviso.categoria }})</p>
+                    <p class="denuncia-count">⚠️ Denunciado {{ aviso.denuncias }} vez(es).</p>
+                    <p>{{ aviso.mensagem }}</p>
+                    <div class="aviso-footer">
+                        <small>Postado em: {{ aviso.data }}</small>
+                        <div class="card-actions">
+                            <form action="{{ url_for('ignorar_denuncia', id=aviso.id) }}" method="POST" style="margin: 0;"><button type="submit" class="button-ignore">Ignorar Denúncias</button></form>
+                            <form action="{{ url_for('deletar', id=aviso.id) }}" method="POST" style="margin: 0;"><button type="submit" class="button-delete">Deletar Aviso</button></form>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>Nenhum aviso denunciado no momento. Tudo limpo! ✅</p>
+        {% endif %}
+    </div>
+</body>
+</html>

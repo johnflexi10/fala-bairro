@@ -1,0 +1,282 @@
+/* Estilos gerais para o corpo da página */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Container principal para centralizar o conteúdo */
+.container {
+    max-width: 800px;
+    margin: auto;
+    background: #fff;
+    padding: 20px 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Cabeçalho com título e ações do usuário */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+/* Títulos */
+h1 {
+    color: #0056b3;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Links e Botões */
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+button, a.button {
+    display: inline-block;
+    background: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: center;
+}
+
+button:hover, a.button:hover {
+    background: #0056b3;
+}
+
+.button-secondary {
+    background-color: #6c757d;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.button-secondary:hover {
+    background-color: #5a6268;
+    text-decoration: none;
+}
+
+.button-admin {
+    background-color: #17a2b8; /* Cor de "informação" */
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.button-admin:hover {
+    background-color: #138496;
+}
+/* Estilo para os cards de aviso */
+.aviso-card {
+    background: #ffffff;
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+
+.admin-card {
+    border-left: 5px solid #dc3545; /* Borda vermelha para destacar */
+}
+
+.aviso-card p {
+    margin: 5px 0;
+}
+
+.aviso-card small {
+    color: #777;
+}
+
+/* Estilo para a data do evento */
+.data-evento {
+    background-color: #e7f3fe;
+    color: #004085;
+    padding: 8px 12px;
+    margin: 10px 0;
+    border-radius: 4px;
+    border-left: 4px solid #0056b3;
+}
+
+/* Estilo para a contagem de denúncias */
+.denuncia-count {
+    background-color: #fff3cd;
+    color: #856404;
+    padding: 8px 12px;
+    margin: 10px 0;
+    border-radius: 4px;
+    border-left: 4px solid #ffc107;
+    font-size: 0.9em;
+}
+
+/* Footer do card de aviso para alinhar data e botão */
+.aviso-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.card-actions {
+    display: flex;
+    gap: 10px; /* Adiciona um espaço entre os botões de editar e deletar */
+}
+
+.button-edit {
+    background: #28a745; /* Verde para indicar edição */
+    color: #fff;
+    padding: 5px 12px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.button-edit:hover { background: #218838; }
+
+.button-ignore {
+    background: #6c757d; /* Cinza */
+    color: #fff;
+    border: none;
+    padding: 5px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.button-ignore:hover { background: #5a6268; }
+
+.button-report {
+    background: #ffc107; /* Amarelo de alerta */
+    color: #212529;
+    border: none;
+    padding: 5px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.button-report:hover {
+    background: #e0a800;
+}
+.button-delete {
+    background: #dc3545; /* Vermelho para indicar perigo/deleção */
+    color: #fff;
+    border: none;
+    padding: 5px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.button-delete:hover {
+    background: #c82333; /* Vermelho mais escuro no hover */
+}
+
+/* Formulário */
+/* Reset de margem para formulários inline como o de deletar */
+form:not(.full-form) {
+    margin-top: 20px;
+}
+
+input[type="text"], textarea, select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    box-sizing: border-box; /* Garante que o padding não afete a largura total */
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background: #eee;
+    margin: 20px 0;
+}
+
+/* --- Flash Messages --- */
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+
+.alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+
+.alert-info {
+    color: #0c5460;
+    background-color: #d1ecf1;
+    border-color: #bee5eb;
+}
+
+.alert-warning {
+    color: #856404;
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+}
+
+/* --- Paginação --- */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    gap: 5px;
+}
+
+.page-link {
+    color: #007bff;
+    padding: 8px 16px;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    transition: background-color .3s, border-color .3s;
+}
+
+.page-link:hover:not(.active) {
+    background-color: #e9ecef;
+    border-color: #dee2e6;
+}
+
+.page-link.active {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+    z-index: 1;
+}
+
+.page-link.disabled {
+    color: #6c757d;
+    pointer-events: none;
+    background-color: #fff;
+    border-color: #ddd;
+}

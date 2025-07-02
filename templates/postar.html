@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Postar Aviso - Fala Bairro</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Postar novo aviso</h1>
+        <form method="POST">
+            <label for="categoria">Categoria:</label><br>
+            <select id="categoria" name="categoria" onchange="toggleCamposEvento()">
+                <option value="Promoção">Promoção</option>
+                <option value="Evento">Evento</option>
+                <option value="Alerta">Alerta</option>
+                <option value="Outros">Outros</option>
+            </select><br><br>
+
+            <!-- Campos que aparecem apenas se a categoria for "Evento" -->
+            <div id="campos-evento" style="display: none;">
+                <label for="evento_dia">Data do Evento:</label><br>
+                <input type="date" id="evento_dia" name="evento_dia"><br><br>
+                <label for="evento_hora">Hora do Evento:</label><br>
+                <input type="time" id="evento_hora" name="evento_hora"><br><br>
+            </div>
+
+            <label for="mensagem">Mensagem:</label><br>
+            <textarea id="mensagem" name="mensagem" rows="5" required></textarea><br><br>
+            <button type="submit">Publicar</button>
+        </form>
+        <br>
+        <a href="/">⬅ Voltar</a>
+    </div>
+
+    <script>
+        function toggleCamposEvento() {
+            const categoria = document.getElementById('categoria').value;
+            const camposEvento = document.getElementById('campos-evento');
+            camposEvento.style.display = (categoria === 'Evento') ? 'block' : 'none';
+        }
+        // Garante que a função seja chamada quando a página carregar
+        window.onload = toggleCamposEvento;
+    </script>
+</body>
+</html>

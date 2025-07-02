@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fala Bairro</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <div class="header">
+            <h1>📢 Mural de Avisos</h1>
+            <div class="user-actions">
+                {% if session.usuario %}
+                    <span>Olá, <strong>{{ session.usuario }}</strong>!</span>
+                    {% if session.usuario in ADMIN_USERS %}
+                        <a href="{{ url_for('admin') }}" class="button-admin">Admin</a>
+                    {% endif %}
+                    <a href="{{ url_for('logout') }}" class="button-secondary">Sair</a>
+                {% else %}
+                    <a href="{{ url_for('login') }}" class="button">Entrar para Postar</a>
+                {% endif %}
+            </div>
+        </div>
+        <a href="{{ url_for('postar') }}" class="button">➕ Postar novo aviso</a>
+        <hr>
+        {% for aviso in avisos %}
+            <div class="aviso-card">
+                <p><strong>{{ aviso.nome }}</strong> ({{ aviso.categoria }})</p>
+                {% if aviso.categoria == 'Evento' and aviso.data_evento %}
+                    <p class="data-evento">🗓️ <strong>Data do Evento:</strong> {{ aviso.data_evento }}</p>
+                {% endif %}
+                {% if aviso.denuncias > 0 %}
+                    <p class="denuncia-count">⚠️ Este aviso foi denunciado {{ aviso.denuncias }} vez(es).</p>
+                {% endif %}
+                <p>{{ aviso.mensagem }}</p>
+                <div class="aviso-footer">
+                    <small>Postado em: {{ aviso.data }}</small>
+                    <div class="card-actions">
+                        <!-- Botão de Denunciar para usuários logados que não são o dono e ainda não denunciaram -->
+                        {% if session.usuario and session.usuario != aviso.nome and aviso.id not in session.get('denunciados', []) %}
+                            <form action="{{ url_for('denunciar', id=aviso.id) }}" method="POST" style="margin: 0;">
+                                <button type="submit" class="button-report" title="Denunciar conteúdo impróprio ou spam">Denunciar</button>
+                            </form>
+                        {% endif %}
+                        <!-- Botões de Editar/Deletar para o dono do aviso -->
+                        {% if session.usuario == aviso.nome %}
+                            <a href="{{ url_for('editar', id=aviso.id) }}" class="button-edit">Editar</a>
+                            <form action="{{ url_for('deletar', id=aviso.id) }}" method="POST" style="margin: 0;">
+                                <button type="submit" class="button-delete">Deletar</button>
+                            </form>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+        {% if total_pages > 1 %}
+        <nav class="pagination">
+            <!-- Link para a página anterior -->
+            {% if page > 1 %}
+                <a href="{{ url_for('index', page=page-1) }}" class="page-link">&laquo; Anterior</a>
+            {% else %}
+                <span class="page-link disabled">&laquo; Anterior</span>
+            {% endif %}
+
+            <!-- Links para as páginas -->
+            {% for p in range(1, total_pages + 1) %}
+                <a href="{{ url_for('index', page=p) }}" class="page-link {% if p == page %}active{% endif %}">{{ p }}</a>
+            {% endfor %}
+
+            <!-- Link para a próxima página -->
+            {% if page < total_pages %}
+                <a href="{{ url_for('index', page=page+1) }}" class="page-link">Próxima &raquo;</a>
+            {% else %}
+                <span class="page-link disabled">Próxima &raquo;</span>
+            {% endif %}
+        </nav>
+        {% endif %}
+    </div>
+</body>
+</html>
