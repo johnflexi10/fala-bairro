@@ -280,3 +280,34 @@ hr {
     background-color: #fff;
     border-color: #ddd;
 }
+
+/* --- Estilos Responsivos para Celular --- */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    .container {
+        padding: 15px;
+    }
+
+    .header {
+        flex-direction: column; /* Empilha o título e as ações do usuário */
+        gap: 15px;
+    }
+
+    h1 {
+        font-size: 1.8em;
+    }
+
+    .aviso-footer {
+        flex-direction: column; /* Empilha a data e os botões */
+        align-items: flex-start; /* Alinha tudo à esquerda */
+        gap: 10px;
+    }
+
+    .card-actions {
+        width: 100%; /* Faz os botões ocuparem a largura toda */
+        justify-content: flex-end; /* Alinha os botões à direita */
+    }
+}
