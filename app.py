@@ -1,10 +1,11 @@
 from flask import Flask, render_template, request, redirect, session, url_for, flash, g
-import sqlite3 # g (global) é um objeto especial do Flask para armazenar dados durante uma requisição.
+import sqlite3
 from datetime import datetime
 import click
 from urllib.parse import urlparse
 import math
 import os
+import psycopg2 # Importa a biblioteca para conectar com o PostgreSQL
 
 app = Flask(__name__)
 
